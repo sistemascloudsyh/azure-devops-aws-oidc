@@ -18,4 +18,4 @@ steps:
       regionName: "us-east-1"
       scriptType: inline
       inlineScript: |
-        aws s3api create-bucket --bucket my-bucket-481665099975-01 --region us-east-1
+        aws s3api create-bucket --bucket my-bucket-<my-account-id>-01 --region us-east-1
