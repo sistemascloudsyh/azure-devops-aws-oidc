@@ -1,0 +1,21 @@
+# Sample pipeline that pass AWS credential to another task
+
+trigger:
+  - main
+
+variables:
+  aws.rolecredential.maxduration: "3600" # Duration in seconds of the temporary credentials, can be set from 900 - 43200
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: AWSShellScript@1
+    continueOnError: true
+    displayName: "Running aws-cli get-caller-identity"
+    inputs:
+      awsCredentials: "aws-oidc-federation"
+      regionName: "us-east-1"
+      scriptType: inline
+      inlineScript: |
+        aws s3api create-bucket --bucket my-bucket-481665099975-01 --region us-east-1
